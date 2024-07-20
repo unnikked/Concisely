@@ -1,15 +1,28 @@
 steps:
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-  args:
-  - gcloud
-  - functions
-  - deploy
-  - concisely 
-  - --gen2
-  - --region=${_LOCATION}
-  - --source=.
-  - --trigger-http
-  - --runtime=python311
-  - --entry-point=summarize  
-  - --allow-unauthenticated
-  - --set-env-vars=OPENAI_API_KEY=${_OPENAI_API_KEY},OPENAI_API_BASE=${_OPENAI_API_BASE},OPENAI_MODEL=${_OPENAI_MODEL},MAX_TOKENS=${_MAX_TOKENS}
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'europe-west8-docker.pkg.dev/web-services-337214/web-service/concisely:$SHORT_SHA', '.']
+
+  # Push the container image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'europe-west8-docker.pkg.dev/web-services-337214/web-service/concisely:$SHORT_SHA']
+
+  # Deploy container image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+    - 'run'
+    - 'deploy'
+    - 'concisely'
+    - '--image'
+    - 'europe-west8-docker.pkg.dev/web-services-337214/web-service/concisely:$SHORT_SHA'
+    - '--region'
+    - 'europe-west8'
+    - '--platform'
+    - 'managed'
+    - '--allow-unauthenticated'
+    - '--set-env-vars'
+    - 'OPENAI_API_KEY=${_OPENAI_API_KEY},OPENAI_API_BASE=${_OPENAI_API_BASE},OPENAI_MODEL=${_OPENAI_MODEL},MAX_TOKENS=${_MAX_TOKENS}'
+
+images:
+- 'europe-west8-docker.pkg.dev/web-services-337214/web-service/concisely:$SHORT_SHA'
