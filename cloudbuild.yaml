@@ -5,7 +5,7 @@ steps:
   - functions
   - deploy
   - concisely
-  - --region=milan
+  - --region=europe-west8
   - --source=.
   - --trigger-http
   - --runtime=python
