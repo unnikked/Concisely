@@ -5,7 +5,7 @@ steps:
   - functions
   - deploy
   - concisely
-  - --region=europe-west8
+  - --region=${_LOCATION}
   - --source=.
   - --trigger-http
   - --runtime=python
