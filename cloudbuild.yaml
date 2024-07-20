@@ -20,6 +20,8 @@ steps:
     - 'europe-west8'
     - '--platform'
     - 'managed'
+    - '--port'
+    - '8000'
     - '--allow-unauthenticated'
     - '--set-env-vars'
     - 'OPENAI_API_KEY=${_OPENAI_API_KEY},OPENAI_API_BASE=${_OPENAI_API_BASE},OPENAI_MODEL=${_OPENAI_MODEL},MAX_TOKENS=${_MAX_TOKENS}'
