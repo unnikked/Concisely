@@ -1,0 +1,11 @@
+fastapi==0.111.0
+fastapi-cli==0.0.4
+opentelemetry-instrumentation-fastapi==0.40b0
+pydantic==1.10.17
+pydantic_core==2.18.3
+python-dotenv==1.0.1
+langchain==0.2.10
+langchain-community==0.2.9
+langchain-core==0.2.22
+langchain-openai==0.1.17
+langchain-text-splitters==0.2.2
