@@ -4,7 +4,8 @@ steps:
   - gcloud
   - functions
   - deploy
-  - concisely
+  - concisely 
+  - --gen2
   - --region=${_LOCATION}
   - --source=.
   - --trigger-http
