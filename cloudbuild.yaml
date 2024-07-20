@@ -1,0 +1,12 @@
+steps:
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  args:
+  - gcloud
+  - functions
+  - deploy
+  - concisely
+  - --region=milan
+  - --source=.
+  - --trigger-http
+  - --runtime=python
+  - --set-env-vars=OPENAI_API_KEY=$OPENAI_API_KEY,OPENAI_API_BASE=$OPENAI_API_BASE,OPENAI_MODEL=$OPENAI_MODEL,MAX_TOKENS=$MAX_TOKENS
